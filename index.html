@@ -312,41 +312,6 @@
     100%{ box-shadow:0 0 0 18px rgba(255,255,255,0); }
   }
 
-  /* ---------- Mic floating button ---------- */
-  .mic-btn{
-    position:absolute;
-    right:26px;
-    bottom:calc(env(safe-area-inset-bottom) + 118px);
-    width:52px; height:52px;
-    border-radius:50%;
-    background:var(--surface-2);
-    border:1px solid var(--border);
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:0 8px 22px rgba(0,0,0,0.4);
-    z-index:5;
-    cursor:pointer;
-  }
-  .mic-btn svg{ width:20px; height:20px; color:var(--text-1); }
-  .mic-btn.talking{
-    background:var(--blue);
-    animation:mictalk 1s ease-in-out infinite;
-  }
-  .mic-btn.talking svg{ color:#08111c; }
-  @keyframes mictalk{
-    0%,100%{ box-shadow:0 8px 22px rgba(74,141,255,0.35), 0 0 0 0 rgba(74,141,255,0.5);}
-    50%{ box-shadow:0 8px 22px rgba(74,141,255,0.45), 0 0 0 10px rgba(74,141,255,0);}
-  }
-  .mic-tip{
-    position:absolute; right:60px; top:50%; transform:translateY(-50%);
-    font-size:11px; color:var(--text-2);
-    background:var(--surface); border:1px solid var(--border);
-    padding:4px 8px; border-radius:8px;
-    white-space:nowrap;
-    opacity:0; pointer-events:none;
-    transition:opacity .2s;
-  }
-  .mic-btn:active + .mic-tip, .mic-btn.talking + .mic-tip{ opacity:1; }
-
   /* ---------- Sheets (Familia / Ubicación) ---------- */
   .scrim{
     position:absolute; inset:0;
@@ -666,11 +631,6 @@
     </button>
   </div>
 
-  <div class="mic-btn" id="micBtn" onmousedown="startTalk()" onmouseup="endTalk()" ontouchstart="startTalk()" ontouchend="endTalk()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4M8 23h8"/></svg>
-  </div>
-  <div class="mic-tip">Hablar</div>
-
 </div>
 
 <script>
@@ -733,11 +693,6 @@
     document.getElementById('sheet'+cap(id)).classList.remove('show');
   }
   function cap(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
-
-  // ---------- Mic ----------
-  const micBtn = document.getElementById('micBtn');
-  function startTalk(){ micBtn.classList.add('talking'); if (navigator.vibrate) navigator.vibrate(20); }
-  function endTalk(){ micBtn.classList.remove('talking'); }
 
   // ---------- Simulated smart alerts ----------
   const smartAlerts = [
